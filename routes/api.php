@@ -2,15 +2,8 @@
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Academia;
-use App\Tipo_usuario;
-use App\Cota;
-use App\Exercicio;
-use App\Lista_exercicio;
-use App\Treino_atleta;
-
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Validation\Rule;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,35 +15,7 @@ use Illuminate\Support\Facades\Validator;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::post('/cadastro', function (Request $request) {
-    $data = $request->all();
-    
-    $validacao = Validator::make($data, [
-        'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        'password' => ['required', 'string', 'min:6', 'confirmed'],
-    ]);
-
-    if($validacao->fails()){
-        return $validacao->errors();
-    }
-    $user = User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'tipo_usuario_id' => $data['tipo_usuario_id'],
-        'password' => Hash::make($data['password']),
-    ]);
-
-    $user->token = $user->createToken($user->email)->accessToken;
-    return $user;   
-});
-
-Route::get('/testes', function(){
-    $treino = Treino_atleta::find(7);
-    return $treino;
-    
-});
+Route::post('cadastro', "UsuarioController@cadastro");
+Route::post('login', "UsuarioController@login");
+Route::middleware('auth:api')->put('/perfil', "UsuarioController@perfil");
+Route::middleware('auth:api')->get('/usuario', "UsuarioController@usuario" );
