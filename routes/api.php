@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Exercicio;
+use App\Grupo_exercicio;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 /*
@@ -19,3 +21,5 @@ Route::post('cadastro', "UsuarioController@cadastro");
 Route::post('login', "UsuarioController@login");
 Route::middleware('auth:api')->put('/perfil', "UsuarioController@perfil");
 Route::middleware('auth:api')->get('/usuario', "UsuarioController@usuario" );
+Route::get('exercicios', "ExercicioController@exercicios");
+Route::get('grupoexercicios', "GrupoExercicioController@grupoExercicios");
