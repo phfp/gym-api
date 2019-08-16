@@ -23,3 +23,4 @@ Route::middleware('auth:api')->put('/perfil', "UsuarioController@perfil");
 Route::middleware('auth:api')->get('/usuario', "UsuarioController@usuario" );
 Route::get('exercicios', "ExercicioController@exercicios");
 Route::get('grupoexercicios', "GrupoExercicioController@grupoExercicios");
+Route::post('cadastroexercicios', "ExercicioController@cadastroExercicios");
