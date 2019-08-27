@@ -19,6 +19,12 @@ class ExercicioController extends Controller
         return $exercicios;
     }
 
+    public function exercicio($id){
+        $exercicio = Exercicio::find($id);
+        $exercicio->imagem = asset($exercicio->imagem);
+        return $exercicio;
+    }
+
     function cadastroExercicios(Request $request) {
 
         $data = $request->all();
